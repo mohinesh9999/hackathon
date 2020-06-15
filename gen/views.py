@@ -31,7 +31,7 @@ from io import StringIO
 import io
 
 d=os.path.dirname(os.getcwd())
-d=os.path.join(d,"app")
+d=os.path.join(d,"backend")
 d=os.path.join(d,"gen")
 class MlModelIntegration(generics.GenericAPIView
     ,mixins.ListModelMixin
@@ -233,7 +233,7 @@ class checkOtp(generics.GenericAPIView
             m.verified='yes'
             m.save()
             
-            requests.post('http://localhost:8000/gen/createUser/',{'username':m.id,'password':m.password})
+            requests.post('https://sih-django.herokuapp.com/gen/createUser/',{'username':m.id,'password':m.password})
             #making user
             return JsonResponse({'status':'correct otp'})
         else:
