@@ -30,7 +30,9 @@ import PIL, PIL.Image
 from io import StringIO
 import io
 
-
+d=os.path.dirname(os.getcwd())
+d=os.path.join(d,"backend")
+d=os.path.join(d,"gen")
 class MlModelIntegration(generics.GenericAPIView
     ,mixins.ListModelMixin
     ,mixins.CreateModelMixin
@@ -49,9 +51,7 @@ class MlModelIntegration(generics.GenericAPIView
         try:
             import matplotlib
             matplotlib.use('Agg')
-            d=os.path.dirname(os.getcwd())
-            d=os.path.join(d,"backend")
-            d=os.path.join(d,"gen")
+            
             x1=d
             # f=os.path.join(d,"States")
             e=os.path.join(d,request.data['state'])
