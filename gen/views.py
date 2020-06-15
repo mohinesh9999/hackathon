@@ -31,7 +31,7 @@ from io import StringIO
 import io
 
 d=os.path.dirname(os.getcwd())
-d=os.path.join(d,"backend")
+# d=os.path.join(d,"backend")
 d=os.path.join(d,"gen")
 class MlModelIntegration(generics.GenericAPIView
     ,mixins.ListModelMixin
