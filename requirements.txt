@@ -75,7 +75,6 @@ PyJWT==1.7.1
 pymongo==3.10.1
 PyMySQL==0.9.3
 pyparsing==2.4.2
-pypiwin32==223
 pyrsistent==0.15.4
 pyserial==3.4
 pytesseract==0.3.4
