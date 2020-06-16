@@ -12,6 +12,7 @@ urlpatterns = [
     path('test/',test),
     # path('signup/<str:id>/',GenAPI.as_view()),
     path('signup/',GenAPI.as_view()),
+    path('getuser/',gu.as_view()),
     path('resend/',GenAPI1.as_view()),
     path('checkOtp/',checkOtp.as_view()),
     path('createUser/',CreateUserView.as_view()),
