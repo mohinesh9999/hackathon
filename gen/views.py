@@ -128,7 +128,10 @@ class MlModelIntegration(generics.GenericAPIView
             graphic = buffer.getvalue()
             graphic = base64.b64encode(graphic)
             buffer.close()
-            return JsonResponse({"buffer":str(graphic)})
+            a=str(graphic)
+            a=a[a.find("'")+1:a.rfind("'")]
+            print(request.user,request)
+            return JsonResponse({"buffer":a})
         except Exception as e:
             return JsonResponse({"buffer":e})
 
@@ -272,4 +275,38 @@ class GenAPI1(generics.GenericAPIView
             return JsonResponse({'otp':a})
         except Exception as e:
             return JsonResponse({'otp':e})
+class gu(generics.GenericAPIView
+    ,mixins.ListModelMixin
+    ,mixins.CreateModelMixin
+    ,mixins.RetrieveModelMixin
+    ,mixins.UpdateModelMixin
+    ,mixins.DestroyModelMixin):
+    serializer_class=signUpSerializer
+    queryset=signup.objects.all()
+    lookup_field='id'
+    authentication_classes=[TokenAuthentication]
+    permission_classes=[IsAuthenticated,]
+    def post(self,request):
+        try:
+            print(request.user,request.user.id,request)
+            # b=self.objects.all().filter(pk=str(request.user))[0]
+            print((signup.objects.get(id=request.user)))
+            d=dict()
+            # b=[entry for entry in (signup.objects.get(id=request.user))]
+            # print(list(queryset))
+            print(signup.objects.get(id=request.user).image.url)
+            b=signup.objects.get(id=request.user)
+            d['name']=b.name
+            d['phoneNumber']=b.phoneNumber
+            d['id']=b.id
+            d['registered_at']=b.registered_at
+            d['dob']=b.dob
+            d['image']=b.image.url
+            d['gender']=b.gender
+            d['password']=b.password
+            d['verified']=b.verified
+            d['otp']=b.otp
+            return JsonResponse({'user':d})
+        except Exception as e:
+            return JsonResponse({'user':e})
 
